@@ -1,11 +1,6 @@
-import "./style.css";
-
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <canvas id="glcanvas" width="640" height="480"></canvas>
-`;
-
 import { initBuffers } from "./init-buffers.js";
 import { drawScene } from "./draw-scene.js";
+import { ProgramInfo } from "./types.js";
 
 let cubeRotation = 0.0;
 let deltaTime = 0;
@@ -16,12 +11,14 @@ main();
 // start here
 //
 function main() {
-  const canvas = document.querySelector<HTMLCanvasElement>("#glcanvas");
+  const canvas = document.querySelector("#glcanvas");
 
-  if (!canvas) return;
+  if (!(canvas instanceof HTMLCanvasElement)) {
+    throw new Error("Canvas HTML element was not rendered correctly");
+  }
 
   // Initialize the GL context
-  const gl = canvas.getContext("webgl");
+  const gl: WebGLRenderingContext = canvas.getContext("webgl")!;
 
   // Only continue if WebGL is available and working
   if (gl === null) {
@@ -73,7 +70,7 @@ function main() {
   // Look up which attributes our shader program is using
   // for aVertexPosition, aVertexColor and also
   // look up uniform locations.
-  const programInfo = {
+  const programInfo: ProgramInfo = {
     program: shaderProgram,
     attribLocations: {
       vertexPosition: gl.getAttribLocation(shaderProgram, "aVertexPosition"),
@@ -83,8 +80,11 @@ function main() {
       projectionMatrix: gl.getUniformLocation(
         shaderProgram,
         "uProjectionMatrix"
-      ),
-      modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
+      )!,
+      modelViewMatrix: gl.getUniformLocation(
+        shaderProgram,
+        "uModelViewMatrix"
+      )!,
     },
   };
 
