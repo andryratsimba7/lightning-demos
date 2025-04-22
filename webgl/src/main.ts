@@ -7,9 +7,7 @@ let deltaTime = 0;
 
 main();
 
-//
-// start here
-//
+//Starting point
 function main() {
   const canvas = document.querySelector("#glcanvas");
 
@@ -30,11 +28,11 @@ function main() {
 
   // Set clear color to black, fully opaque
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
   // Clear the color buffer with specified clear color
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Vertex shader program
-
   const vsSource = `
     attribute vec4 aVertexPosition;
     attribute vec4 aVertexColor;
@@ -51,7 +49,6 @@ function main() {
   `;
 
   // Fragment shader program
-
   const fsSource = `
     varying lowp vec4 vColor;
 
@@ -90,6 +87,7 @@ function main() {
 
   // Here's where we call the routine that builds all the
   // objects we'll be drawing.
+  //TODO This is where we define the drawn objects
   const buffers = initBuffers(gl);
 
   let then = 0;
@@ -100,6 +98,7 @@ function main() {
     deltaTime = now - then;
     then = now;
 
+    //TODO This is where we define the scene (camera, positions, colors)
     drawScene(gl, programInfo, buffers, cubeRotation);
     cubeRotation += deltaTime;
 

@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Mesh } from "three";
 
+//TODO Defining the box component like any React component
 function Box() {
   const ref = useRef<Mesh>(null!);
 
@@ -23,6 +24,7 @@ function Box() {
   );
 }
 
+//TODO Rendering the 3D scene like any React component
 function App() {
   return (
     <Canvas

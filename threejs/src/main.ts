@@ -6,11 +6,11 @@ function init() {
   const width = 640;
   const height = 480;
 
-  //Init camera
+  //TODO Initilizing the camera
   const camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 10);
   camera.position.z = 2;
 
-  //Init scene
+  //TODO Initializing the scene
   const scene = new THREE.Scene();
 
   const piece = new THREE.BoxGeometry(1, 1, 1).toNonIndexed();
@@ -20,7 +20,7 @@ function init() {
   const positionAttribute = piece.getAttribute("position");
   const colors = [];
 
-  // Define the primary colors
+  //TODO Defining the colors
   const primaryColors = [
     new THREE.Color(1, 0, 0), // Red
     new THREE.Color(0, 1, 0), // Green
@@ -44,7 +44,7 @@ function init() {
     colors.push(color.r, color.g, color.b);
   }
 
-  // define the new attribute
+  //TODO Defining the cube, setting its colors, adding it to the scene
   piece.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
 
   const cube = new THREE.Mesh(piece, material);
@@ -57,7 +57,7 @@ function init() {
   renderer.setAnimationLoop(animation);
   document.body.appendChild(renderer.domElement);
 
-  //Init render loop
+  //TODO Initializing render loop
   function animation(time: number) {
     cube.rotation.x = time / 2000;
     cube.rotation.y = time / 1000;
